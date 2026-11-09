@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: VerdeFlow Sample API
+  version: 1.0.0
+  description: Demonstration API for VerdeFlow energy profiling
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses: { '200': { description: OK } }
+  /api/products:
+    get:
+      summary: List all products
+      responses: { '200': { description: Product list } }
+  /api/products/{id}:
+    get:
+      summary: Get product by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      responses: { '200': { description: Product } }
+  /api/compute:
+    post:
+      summary: Compute endpoint (energy guzzler in heavy variant)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                iterations: { type: integer, default: 1000 }
+      responses: { '200': { description: Compute result } }
+  /api/search:
+    get:
+      summary: Search products
+      parameters:
+        - in: query
+          name: q
+          schema: { type: string }
+        - in: query
+          name: category
+          schema: { type: string }
+      responses: { '200': { description: Search results } }
+  /api/stats:
+    get:
+      summary: Aggregate stats (energy-intensive in heavy variant)
+      responses: { '200': { description: Stats } }

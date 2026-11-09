@@ -20,6 +20,10 @@ An experiment manifest will record the requested workload, exact code and build 
 
 The measurement protocol, calculations, raw data access, and reproducibility features will remain in the open source project. A future commercial offering may add managed hosting and organization features without requiring a separate scientific core.
 
+## Documentation
+
+See the [documentation index](doc/README.md) for research specifications, design material, and references from the earlier prototype.
+
 ## License
 
 VerdeFlow is licensed under the [Apache License 2.0](LICENSE).

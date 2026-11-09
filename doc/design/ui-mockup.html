@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VerdeFlow UI Mockup — All Roles</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f8fafc;--bg3:#f1f5f9;
+  --bgs:rgba(21,128,61,.08);--bgw:rgba(180,83,9,.08);--bgd:rgba(185,28,28,.08);--bgi:rgba(29,78,216,.08);
+  --ts:#0f172a;--t2:#475569;--t3:#94a3b8;
+  --tsu:#15803d;--tw:#b45309;--td:#b91c1c;--ti:#1d4ed8;
+  --b3:rgba(15,23,42,.10);--b2:rgba(15,23,42,.18);--bd:rgba(185,28,28,.28);
+  --brand:#1a6b3c;--bh:#155e33;
+  --r8:8px;--r12:12px;--sans:system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code',monospace;
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#1e2433;--bg2:#252d3d;--bg3:#1a2030;--bgs:rgba(21,128,61,.13);--bgw:rgba(180,83,9,.13);--bgd:rgba(185,28,28,.13);--bgi:rgba(29,78,216,.13);--ts:#e2e8f0;--t2:#94a3b8;--t3:#64748b;--tsu:#4ade80;--tw:#fbbf24;--td:#f87171;--ti:#60a5fa;--b3:rgba(255,255,255,.08);--b2:rgba(255,255,255,.15);}
+}
+body{font-family:var(--sans);background:var(--bg3);color:var(--ts);font-size:13px;line-height:1.5}
+
+/* ── role switcher bar ── */
+.role-bar{background:var(--bg);border-bottom:0.5px solid var(--b3);padding:8px 16px;display:flex;align-items:center;gap:8px;font-size:12px;position:sticky;top:0;z-index:300}
+.role-bar span{color:var(--t2)}
+.rbtn{padding:4px 10px;border:0.5px solid var(--b2);border-radius:6px;background:var(--bg);color:var(--t2);cursor:pointer;font-size:11px;font-weight:500;transition:background .1s}
+.rBtn:hover{background:var(--bg2)}
+.rBtn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.rBtn.admin-active{background:#0f1f2e;color:#e2e8f0;border-color:#0f1f2e}
+
+/* ── shell ── */
+.shell{display:flex;height:calc(100vh - 37px);min-height:660px}
+.sidebar{width:200px;background:var(--bg);border-right:0.5px solid var(--b3);display:flex;flex-direction:column;flex-shrink:0;transition:background .2s}
+.sidebar.admin-shell{background:#0f1f2e}
+.content{flex:1;overflow:auto;display:flex;flex-direction:column;min-width:0}
+
+/* ── logo ── */
+.logo{padding:17px 16px 13px;display:flex;align-items:center;gap:9px;border-bottom:0.5px solid var(--b3)}
+.sidebar.admin-shell .logo{border-color:rgba(255,255,255,.1)}
+.logo-icon{width:28px;height:28px;background:var(--brand);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-text{font-size:14px;font-weight:500}
+.sidebar.admin-shell .logo-text{color:#e2e8f0}
+.logo-sub{font-size:10px;color:var(--t3);margin-top:1px}
+.sidebar.admin-shell .logo-sub{color:#64748b}
+
+/* ── nav ── */
+nav{flex:1;padding:6px 0}
+.nav-section{padding:13px 16px 3px;font-size:10px;font-weight:500;color:var(--t3);letter-spacing:.06em;text-transform:uppercase}
+.sidebar.admin-shell .nav-section{color:#64748b}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 16px;font-size:13px;cursor:pointer;color:var(--t2);transition:background .1s;user-select:none}
+.sidebar.admin-shell .nav-item{color:#94a3b8}
+.nav-item:hover{background:var(--bg2);color:var(--ts)}
+.sidebar.admin-shell .nav-item:hover{background:rgba(255,255,255,.06);color:#e2e8f0}
+.nav-item.active{background:rgba(26,107,60,.08);color:var(--brand);font-weight:500}
+.sidebar.admin-shell .nav-item.active{background:rgba(255,255,255,.08);color:#e2e8f0;font-weight:500}
+.nav-item svg{width:13px;height:13px;flex-shrink:0;opacity:.7}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot.on{background:#22c55e}.dot.off{background:var(--b2)}
+.nav-badge{margin-left:auto;font-size:10px;background:var(--bgd);color:var(--td);padding:1px 6px;border-radius:99px;font-weight:500}
+
+/* ── sidebar footer ── */
+.sf{padding:11px 16px;border-top:0.5px solid var(--b3)}
+.sidebar.admin-shell .sf{border-color:rgba(255,255,255,.1)}
+.org-row{display:flex;align-items:center;gap:9px}
+.av{width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#fff;flex-shrink:0}
+.av.admin-av{background:#334155}
+.role-pill{font-size:9px;font-weight:600;padding:1px 6px;border-radius:99px;margin-top:2px;display:inline-block}
+.rp-viewer{background:var(--bg2);color:var(--t3)}
+.rp-developer{background:var(--bgi);color:var(--ti)}
+.rp-admin{background:var(--bgs);color:var(--tsu)}
+.rp-superadmin{background:rgba(185,28,28,.12);color:var(--td)}
+
+/* ── topbar ── */
+.topbar{height:46px;background:var(--bg);border-bottom:0.5px solid var(--b3);display:flex;align-items:center;padding:0 18px;gap:10px;flex-shrink:0}
+.bc{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t2);flex:1;min-width:0}
+.bcc{color:var(--ts);font-weight:500}
+.bcs{color:var(--t3)}
+.ta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.admin-pill{font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;background:rgba(185,28,28,.1);color:var(--td);border:0.5px solid rgba(185,28,28,.2);letter-spacing:.04em}
+.viewas-banner{background:rgba(185,28,28,.05);border-bottom:0.5px solid rgba(185,28,28,.15);padding:6px 18px;font-size:11px;color:var(--td);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.viewas-banner button{font-size:11px;color:var(--td);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0}
+.readonly-label{font-size:11px;color:var(--t3);font-style:italic;margin-left:auto}
+
+/* ── buttons ── */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;font-size:12px;font-weight:500;border-radius:6px;cursor:pointer;border:0.5px solid var(--b2);background:var(--bg);color:var(--ts);transition:background .1s;white-space:nowrap;line-height:1}
+.btn:hover{background:var(--bg2)}
+.btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}.btn.primary:hover{background:var(--bh)}
+.btn.danger{color:var(--td);border-color:var(--bd)}.btn.danger:hover{background:var(--bgd)}
+.btn.sm{padding:4px 9px;font-size:11px}.btn.xs{padding:2px 7px;font-size:10px}
+
+/* ── main ── */
+.main{flex:1;padding:20px;overflow:auto}
+.page{display:none}.page.active{display:block}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px}
+.pt{font-size:17px;font-weight:500}.ps{font-size:12px;color:var(--t2);margin-top:3px}
+
+/* ── metric cards ── */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:10px;margin-bottom:16px}
+.mc{background:var(--bg2);border-radius:var(--r8);padding:11px 13px}
+.mcl{font-size:10px;color:var(--t3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
+.mcv{font-size:19px;font-weight:500}.mcs{font-size:10px;color:var(--t3);margin-top:2px}
+.green{color:var(--brand)}.amber{color:var(--tw)}.red{color:var(--td)}
+
+/* ── sections ── */
+.sec{background:var(--bg);border:0.5px solid var(--b3);border-radius:10px;margin-bottom:13px;overflow:hidden}
+.sh{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:0.5px solid var(--b3)}
+.st{font-size:13px;font-weight:500}
+
+/* ── tables ── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:7px 12px;text-align:left;font-size:10px;font-weight:500;color:var(--t3);background:var(--bg2);border-bottom:0.5px solid var(--b3);text-transform:uppercase;letter-spacing:.04em}
+td{padding:8px 12px;border-bottom:0.5px solid var(--b3)}
+tr:last-child td{border-bottom:none}
+.click:hover td{background:var(--bg2);cursor:pointer}
+
+/* ── badges ── */
+.badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:99px;font-size:10px;font-weight:500;white-space:nowrap}
+.bg{background:var(--bgs);color:var(--tsu)}.ba{background:var(--bgw);color:var(--tw)}.br{background:var(--bgd);color:var(--td)}.bb{background:var(--bg2);color:var(--t2)}.bi{background:var(--bgi);color:var(--ti)}
+
+/* ── code ── */
+code{font-family:var(--mono);font-size:11px;background:var(--bg2);padding:2px 5px;border-radius:4px}
+
+/* ── tabs ── */
+.tabs{display:flex;border-bottom:0.5px solid var(--b3)}
+.tab{padding:9px 15px;font-size:13px;cursor:pointer;color:var(--t2);border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:color .1s;user-select:none}
+.tab:hover{color:var(--ts)}.tab.active{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tp{display:none;padding:14px}.tp.active{display:block}
+
+/* ── chart ── */
+.cw{padding:13px 15px;height:168px}
+.bars{display:flex;align-items:flex-end;gap:5px;height:124px;padding:0 4px}
+.bg2{display:flex;flex-direction:column;align-items:center;flex:1;gap:3px}
+.bar{width:100%;border-radius:3px 3px 0 0;cursor:pointer;transition:opacity .15s;min-width:6px}
+.bar:hover{opacity:.7}.blbl{font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:34px;text-align:center}
+.cl{display:flex;gap:11px;padding:3px 4px 0;font-size:10px;color:var(--t2)}
+.ld{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:2px}
+
+/* ── alert rows ── */
+.ar{display:flex;align-items:center;gap:10px;padding:10px 15px;border-bottom:0.5px solid var(--b3);font-size:12px}
+.ar:last-child{border-bottom:none}.ar.acked{opacity:.4}
+
+/* ── device rows ── */
+.dr{display:flex;align-items:center;gap:11px;padding:10px 15px;border-bottom:0.5px solid var(--b3);font-size:12px}
+.dr:last-child{border-bottom:none}
+.sd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sd.on{background:#22c55e}.sd.off{background:var(--b2)}.sd.busy{background:#f59e0b}
+
+/* ── endpoint rows ── */
+.er{display:flex;align-items:center;gap:8px;padding:7px 15px;border-bottom:0.5px solid var(--b3);font-size:12px}
+.er:last-child{border-bottom:none}
+.mt{display:inline-flex;align-items:center;justify-content:center;width:38px;padding:2px 0;border-radius:4px;font-size:9px;font-weight:600;flex-shrink:0}
+.GET{background:#dbeafe;color:#1e40af}.POST{background:#dcfce7;color:#166534}.PUT{background:#fef3c7;color:#92400e}.DELETE{background:#fee2e2;color:#991b1b}
+
+/* ── forms ── */
+.fg{margin-bottom:12px}
+.fl{font-size:11px;font-weight:500;margin-bottom:4px;display:block;color:var(--t2)}
+.fi{width:100%;padding:7px 10px;font-size:12px;border:0.5px solid var(--b2);border-radius:6px;background:var(--bg);color:var(--ts);outline:none;font-family:var(--sans)}
+.fi:focus{border-color:rgba(29,78,216,.4);box-shadow:0 0 0 2px var(--bgi)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+/* ── modals ── */
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.38);display:none;align-items:center;justify-content:center;z-index:200}
+.mbg.open{display:flex}
+.modal{background:var(--bg);border:0.5px solid var(--b2);border-radius:var(--r12);padding:22px;width:420px;max-width:93vw;max-height:87vh;overflow-y:auto}
+.mt2{font-size:14px;font-weight:500;margin-bottom:15px}
+.mf{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}
+.key-box{font-family:var(--mono);font-size:11px;background:rgba(21,128,61,.08);color:var(--tsu);border:0.5px solid rgba(21,128,61,.3);border-radius:6px;padding:10px 12px;word-break:break-all;margin-top:10px;display:none}
+
+/* ── meta grid ── */
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
+.mi{background:var(--bg2);border-radius:6px;padding:9px 12px}
+.mk{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.mv{font-size:13px;font-weight:500}
+
+/* ── progress ── */
+.prog{height:3px;background:var(--b3);border-radius:2px;overflow:hidden;margin-top:5px}
+.pf{height:100%;border-radius:2px;background:var(--brand)}
+
+/* ── admin-specific ── */
+.admin-stat{background:var(--bg);border:0.5px solid var(--b3);border-radius:var(--r8);padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.admin-stat-icon{width:32px;height:32px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.org-row-admin{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:0.5px solid var(--b3);font-size:12px}
+.org-row-admin:last-child{border-bottom:none}
+.tier-badge{display:inline-flex;align-items:center;padding:1px 7px;border-radius:99px;font-size:10px;font-weight:500}
+.tier-ent{background:rgba(139,92,246,.1);color:#7c3aed}
+.tier-team{background:var(--bgi);color:var(--ti)}
+.tier-open{background:var(--bg2);color:var(--t2)}
+
+/* ── 403 page ── */
+.forbidden{padding:56px 24px;text-align:center}
+.forbidden svg{margin:0 auto 16px;display:block;color:var(--t3)}
+.forbidden h2{font-size:15px;font-weight:500;margin-bottom:8px}
+.forbidden p{font-size:13px;color:var(--t2)}
+
+/* ── empty ── */
+.empty{padding:36px;text-align:center;color:var(--t3);font-size:13px}
+
+/* ── utils ── */
+.row{display:flex;align-items:center;gap:8px}
+.muted{color:var(--t2)}
+textarea.fi{resize:vertical;min-height:70px}
+</style>
+</head>
+<body>
+
+<!-- Role switcher -->
+<div class="role-bar">
+  <span>Viewing as:</span>
+  <button class="rBtn" id="btn-viewer"    onclick="setRole('viewer')">Viewer</button>
+  <button class="rBtn active" id="btn-developer" onclick="setRole('developer')">Developer</button>
+  <button class="rBtn" id="btn-admin"     onclick="setRole('org_admin')">Org admin</button>
+  <button class="rBtn" id="btn-super"     onclick="setRole('super_admin')">Super admin</button>
+  <span style="margin-left:8px;font-size:11px;color:var(--t3)" id="role-hint">
+    All create/edit/delete actions visible
+  </span>
+</div>
+
+<div class="shell">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <div class="sidebar" id="sidebar">
+
+    <!-- org-user logo (all non-super roles) -->
+    <div class="logo" id="logo-org">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 2L10.5 6.5H14L11 9.5L12.5 14L8 11.5L3.5 14L5 9.5L2 6.5H5.5L8 2Z" fill="#4ade80"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">VerdeFlow</div>
+        <div class="logo-sub">v0.1.0 · dev</div>
+      </div>
+    </div>
+
+    <!-- super admin logo -->
+    <div class="logo" id="logo-admin" style="display:none">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 2L10.5 6.5H14L11 9.5L12.5 14L8 11.5L3.5 14L5 9.5L2 6.5H5.5L8 2Z" fill="#4ade80"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text" style="color:#e2e8f0">VerdeFlow</div>
+        <div class="logo-sub">Platform admin</div>
+      </div>
+    </div>
+
+    <!-- org-user nav -->
+    <nav id="nav-org">
+      <div class="nav-section">Monitor</div>
+      <div class="nav-item active" onclick="go('dashboard')">
+        <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item" onclick="go('projects')">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 3.5a1 1 0 011-1h3l1 2h6a1 1 0 011 1V11a1 1 0 01-1 1H2a1 1 0 01-1-1V3.5z" stroke="currentColor" stroke-width="1.2"/></svg>
+        Projects
+      </div>
+      <div class="nav-item" onclick="go('runs')">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4.5v3l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Runs
+      </div>
+      <div class="nav-item" onclick="go('alerts')">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5L13 12H1L7 1.5Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M7 6v3M7 10.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Alerts <span class="nav-badge">3</span>
+      </div>
+      <!-- developer+ only -->
+      <div id="nav-manage" style="display:none">
+        <div class="nav-section">Manage</div>
+        <div class="nav-item" onclick="go('devices')">
+          <div class="dot on"></div>Devices
+        </div>
+        <div class="nav-item" onclick="go('workloads')">
+          <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 6.5h6M4 9h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Workloads
+        </div>
+      </div>
+      <!-- org_admin+ only -->
+      <div id="nav-settings" style="display:none">
+        <div class="nav-section">Settings</div>
+        <div class="nav-item" onclick="go('settings')">
+          <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.2"/><path d="M7 1v2M7 11v2M1 7h2M11 7h2M2.5 2.5l1.5 1.5M10 10l1.5 1.5M2.5 11.5L4 10M10 4l1.5-1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Settings
+        </div>
+      </div>
+    </nav>
+
+    <!-- super admin nav -->
+    <nav id="nav-admin" style="display:none">
+      <div class="nav-section">Platform</div>
+      <div class="nav-item active" onclick="go('admin-overview')" style="color:#94a3b8">
+        <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
+        Overview
+      </div>
+      <div class="nav-item" onclick="go('admin-orgs')" style="color:#94a3b8">
+        <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M4 3V2a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.2"/></svg>
+        Organisations
+      </div>
+      <div class="nav-item" onclick="go('admin-users')" style="color:#94a3b8">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="4.5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        All users
+      </div>
+      <div class="nav-section">Super admin</div>
+    </nav>
+
+    <!-- sidebar footer -->
+    <div class="sf">
+      <div class="org-row">
+        <div class="av" id="sf-av">LU</div>
+        <div>
+          <div style="font-size:12px;font-weight:500" id="sf-name">LUT University</div>
+          <div id="sf-role"><span class="role-pill rp-developer">Developer</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sidebar -->
+
+  <!-- ═══ CONTENT ═══ -->
+  <div class="content">
+
+    <!-- view-as banner (super admin viewing an org) -->
+    <div class="viewas-banner" id="viewas-banner" style="display:none">
+      Viewing as LUT University ·
+      <button onclick="document.getElementById('viewas-banner').style.display='none'">Exit org view →</button>
+    </div>
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="bc" id="bc"><span class="bcc">Dashboard</span></div>
+      <div id="admin-pill-wrap" style="display:none">
+        <span class="admin-pill">ADMIN</span>
+      </div>
+      <div class="ta" id="topbar-actions">
+        <button class="btn" onclick="openModal('run-modal')">Trigger run</button>
+        <button class="btn primary" onclick="openModal('project-modal')">+ New project</button>
+      </div>
+      <span class="readonly-label" id="readonly-label" style="display:none">View only</span>
+    </div>
+
+    <div class="main">
+
+      <!-- ══ DASHBOARD ══ -->
+      <div class="page active" id="p-dashboard">
+        <div class="ph">
+          <div><div class="pt">Dashboard</div><div class="ps">Energy overview across all projects</div></div>
+        </div>
+        <div class="cards">
+          <div class="mc"><div class="mcl">Projects</div><div class="mcv">4</div><div class="mcs">2 active this week</div></div>
+          <div class="mc"><div class="mcl">Total runs</div><div class="mcv">127</div><div class="mcs">+12 this week</div></div>
+          <div class="mc"><div class="mcl">Devices online</div><div class="mcv green">2 / 3</div><div class="mcs">1 offline</div></div>
+          <div class="mc"><div class="mcl">Open alerts</div><div class="mcv red">3</div><div class="mcs">1 critical</div></div>
+          <div class="mc"><div class="mcl">Avg energy/req</div><div class="mcv amber">0.384 J</div><div class="mcs">−6% vs last week</div></div>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">Recent runs</span><button class="btn xs" onclick="go('runs')">View all →</button></div>
+          <table>
+            <thead><tr><th>Project</th><th>Commit</th><th>Status</th><th>Energy/req</th><th>Latency</th><th>Triggered</th><th>Time</th></tr></thead>
+            <tbody>
+              <tr class="click" onclick="go('run-detail')"><td>Sample API</td><td><code>3f8a1bc</code></td><td><span class="badge bg">completed</span></td><td>0.361 J</td><td>98 ms</td><td>webhook</td><td class="muted">2 min ago</td></tr>
+              <tr class="click" onclick="go('run-detail')"><td>Sample API</td><td><code>b2e9044</code></td><td><span class="badge br">completed ⚠</span></td><td class="red" style="font-weight:500">0.680 J</td><td class="red">198 ms</td><td>webhook</td><td class="muted">8 min ago</td></tr>
+              <tr class="click" onclick="go('run-detail')"><td>EAD API</td><td><code>9a1d77f</code></td><td><span class="badge br">failed</span></td><td>—</td><td>—</td><td>manual</td><td class="muted">22 min ago</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sec" id="dash-alerts-sec">
+          <div class="sh"><span class="st">Active regression alerts</span><button class="btn xs" onclick="go('alerts')">Manage →</button></div>
+          <div class="ar">
+            <span class="badge br">critical</span>
+            <span style="flex:1">energy_per_request_j +82% — Sample API b2e9044</span>
+            <button class="btn xs ack-btn" onclick="this.closest('.ar').classList.add('acked')">Acknowledge</button>
+          </div>
+          <div class="ar">
+            <span class="badge ba">warning</span>
+            <span style="flex:1">mean_latency_ms +31% — EAD API 7c3a021</span>
+            <button class="btn xs ack-btn" onclick="this.closest('.ar').classList.add('acked')">Acknowledge</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PROJECTS ══ -->
+      <div class="page" id="p-projects">
+        <div class="ph">
+          <div><div class="pt">Projects</div><div class="ps">Manage API projects and endpoint profiles</div></div>
+          <div class="row" id="projects-actions">
+            <button class="btn primary" onclick="openModal('project-modal')">+ New project</button>
+          </div>
+        </div>
+        <div class="sec">
+          <table>
+            <thead><tr><th>Name</th><th>Target URL</th><th>Endpoints</th><th>Last run</th><th>Energy/req</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr class="click" onclick="go('project-detail')"><td style="font-weight:500">Sample API</td><td class="muted">localhost:8000</td><td>6</td><td>2 min ago</td><td>0.361 J</td><td><span class="badge bg">active</span></td><td><button class="btn xs">Open →</button></td></tr>
+              <tr class="click" onclick="go('project-detail')"><td style="font-weight:500">EAD API</td><td class="muted">localhost:9000</td><td>4</td><td>22 min ago</td><td>0.512 J</td><td><span class="badge ba">alert</span></td><td><button class="btn xs">Open →</button></td></tr>
+              <tr class="click" onclick="go('project-detail')"><td style="font-weight:500">VerdeFlow API</td><td class="muted">localhost:4000</td><td>12</td><td>1 hr ago</td><td>0.298 J</td><td><span class="badge bg">active</span></td><td><button class="btn xs">Open →</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ PROJECT DETAIL ══ -->
+      <div class="page" id="p-project-detail">
+        <div class="ph">
+          <div><div class="pt">Sample API</div><div class="ps">http://localhost:8000 · 6 endpoints · main</div></div>
+          <div class="row" id="proj-detail-actions">
+            <button class="btn">Trigger run</button>
+            <button class="btn proj-edit-btn">Edit</button>
+            <button class="btn danger proj-delete-btn">Delete</button>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="mc"><div class="mcl">Energy/req</div><div class="mcv green">0.361 J</div><div class="mcs">−12% vs last run</div></div>
+          <div class="mc"><div class="mcl">Mean latency</div><div class="mcv">98 ms</div><div class="mcs">p95: 142 ms</div></div>
+          <div class="mc"><div class="mcl">Mean power</div><div class="mcv">2.46 W</div><div class="mcs">peak: 4.1 W</div></div>
+          <div class="mc"><div class="mcl">CO₂e/req</div><div class="mcv">0.040 mg</div><div class="mcs">400 g/kWh stub</div></div>
+          <div class="mc"><div class="mcl">Coverage</div><div class="mcv">6 / 6</div><div class="prog"><div class="pf" style="width:100%"></div></div></div>
+          <div class="mc"><div class="mcl">Open alerts</div><div class="mcv red">1</div><div class="mcs">critical</div></div>
+        </div>
+        <div class="sec">
+          <div class="sh">
+            <span class="st">Energy trend</span>
+            <div class="row">
+              <select style="font-size:11px;padding:4px 8px;border:0.5px solid var(--b2);border-radius:5px;background:var(--bg);color:var(--ts)">
+                <option>Energy/req (J)</option><option>Mean latency (ms)</option><option>Mean power (W)</option>
+              </select>
+            </div>
+          </div>
+          <div class="cw">
+            <div class="bars">
+              <div class="bg2"><div class="bar" style="height:62%;background:var(--brand);opacity:.65"></div><div class="blbl">3f2a1</div></div>
+              <div class="bg2"><div class="bar" style="height:100%;background:#b91c1c"></div><div class="blbl" style="color:#b91c1c">b2e90</div></div>
+              <div class="bg2"><div class="bar" style="height:55%;background:var(--brand);opacity:.72"></div><div class="blbl">c4d11</div></div>
+              <div class="bg2"><div class="bar" style="height:59%;background:var(--brand);opacity:.80"></div><div class="blbl">7e5b3</div></div>
+              <div class="bg2"><div class="bar" style="height:53%;background:var(--brand)"></div><div class="blbl">3f8a1</div></div>
+            </div>
+            <div class="cl"><div class="row"><div class="ld" style="background:var(--brand)"></div>Normal</div><div class="row"><div class="ld" style="background:#b91c1c"></div>Regression</div></div>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="tabs">
+            <div class="tab active" onclick="tab(this,'t-runs2')">Run history</div>
+            <div class="tab proj-ep-tab" onclick="tab(this,'t-eps')">Endpoints</div>
+            <div class="tab proj-wl-tab" onclick="tab(this,'t-wls')">Workloads</div>
+            <div class="tab" onclick="tab(this,'t-palerts')">Alerts</div>
+          </div>
+          <div class="tp active" id="t-runs2">
+            <table>
+              <thead><tr><th>Commit</th><th>Branch</th><th>Status</th><th>Energy/req</th><th>Latency</th><th>Power</th><th>Triggered</th><th></th></tr></thead>
+              <tbody>
+                <tr class="click" onclick="go('run-detail')"><td><code>3f8a1bc</code></td><td>main</td><td><span class="badge bg">completed</span></td><td>0.361 J</td><td>98 ms</td><td>2.46 W</td><td>webhook</td><td><button class="btn xs">View</button></td></tr>
+                <tr class="click" onclick="go('run-detail')"><td><code>b2e9044</code></td><td>main</td><td><span class="badge br">completed ⚠</span></td><td class="red" style="font-weight:500">0.680 J</td><td class="red">198 ms</td><td>4.10 W</td><td>webhook</td><td><button class="btn xs">View</button></td></tr>
+                <tr class="click" onclick="go('run-detail')"><td><code>3f2a1cc</code></td><td>main</td><td><span class="badge bg">completed</span></td><td>0.411 J</td><td>120 ms</td><td>3.20 W</td><td>webhook</td><td><button class="btn xs">View</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tp" id="t-eps">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+              <button class="btn sm primary ep-add-btn" onclick="openModal('endpoint-modal')">+ Add endpoint</button>
+            </div>
+            <div class="er"><span class="mt GET">GET</span><span style="flex:1;font-family:var(--mono);font-size:11px">/api/users</span><span class="muted">w:30</span><button class="btn xs ep-edit-btn">Edit</button><button class="btn xs danger ep-del-btn">×</button></div>
+            <div class="er"><span class="mt POST">POST</span><span style="flex:1;font-family:var(--mono);font-size:11px">/api/compute</span><span class="muted">w:20</span><button class="btn xs ep-edit-btn">Edit</button><button class="btn xs danger ep-del-btn">×</button></div>
+            <div class="er"><span class="mt GET">GET</span><span style="flex:1;font-family:var(--mono);font-size:11px">/api/stats</span><span class="muted">w:20</span><button class="btn xs ep-edit-btn">Edit</button><button class="btn xs danger ep-del-btn">×</button></div>
+          </div>
+          <div class="tp" id="t-wls">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+              <button class="btn sm primary wl-add-btn" onclick="openModal('workload-modal')">+ New workload</button>
+            </div>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Requests</th><th>Concurrency</th><th></th></tr></thead>
+              <tbody>
+                <tr><td style="font-weight:500">Default workload</td><td><span class="badge bi">manual</span></td><td>100</td><td>5</td><td class="row"><button class="btn xs wl-edit-btn">Edit</button><button class="btn xs danger wl-del-btn">Delete</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tp" id="t-palerts">
+            <div class="ar" style="padding:10px 0">
+              <span class="badge br">critical</span>
+              <div style="flex:1"><div style="font-weight:500">energy_per_request_j +82%</div><div class="muted" style="font-size:11px">0.411 → 0.680 J · b2e9044 · 8 min ago</div></div>
+              <button class="btn xs ack-btn" onclick="this.closest('.ar').classList.add('acked')">Acknowledge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ RUN DETAIL ══ -->
+      <div class="page" id="p-run-detail">
+        <div class="ph">
+          <div><div class="pt">Run · <code style="font-size:14px">3f8a1bc</code></div><div class="ps">Sample API · main · refactor: fix N+1, O(1) lookups</div></div>
+          <div class="row"><button class="btn">Compare</button><span class="badge bg" style="padding:5px 10px;font-size:11px">completed</span></div>
+        </div>
+        <div class="mg">
+          <div class="mi"><div class="mk">Energy/req</div><div class="mv green">0.361 J</div></div>
+          <div class="mi"><div class="mk">Total energy</div><div class="mv">36.1 J</div></div>
+          <div class="mi"><div class="mk">Mean power</div><div class="mv">2.46 W</div></div>
+          <div class="mi"><div class="mk">Peak power</div><div class="mv">4.10 W</div></div>
+          <div class="mi"><div class="mk">Mean latency</div><div class="mv">98 ms</div></div>
+          <div class="mi"><div class="mk">p95 latency</div><div class="mv">142 ms</div></div>
+          <div class="mi"><div class="mk">Throughput</div><div class="mv">10.2 req/s</div></div>
+          <div class="mi"><div class="mk">CO₂e total</div><div class="mv">0.0040 g</div></div>
+          <div class="mi"><div class="mk">CPU mean</div><div class="mv">18.4%</div></div>
+          <div class="mi"><div class="mk">Memory mean</div><div class="mv">512 MB</div></div>
+          <div class="mi"><div class="mk">Errors</div><div class="mv">0 / 100</div></div>
+          <div class="mi"><div class="mk">Device</div><div class="mv">dev-agent</div></div>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">Per-endpoint breakdown</span></div>
+          <table>
+            <thead><tr><th>Endpoint</th><th>Energy/req</th><th>Mean latency</th><th>p95</th><th>Requests</th><th>Errors</th></tr></thead>
+            <tbody>
+              <tr><td><span class="mt GET">GET</span> <code>/api/users</code></td><td>0.291 J</td><td>82 ms</td><td>118 ms</td><td>30</td><td>0</td></tr>
+              <tr><td><span class="mt POST">POST</span> <code>/api/compute</code></td><td>0.514 J</td><td>138 ms</td><td>198 ms</td><td>20</td><td>0</td></tr>
+              <tr><td><span class="mt GET">GET</span> <code>/api/stats</code></td><td>0.201 J</td><td>68 ms</td><td>92 ms</td><td>20</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ RUNS ══ -->
+      <div class="page" id="p-runs">
+        <div class="ph">
+          <div><div class="pt">Runs</div><div class="ps">Energy profiling run history</div></div>
+          <button class="btn primary run-trigger-btn" onclick="openModal('run-modal')">Trigger run</button>
+        </div>
+        <div class="row" style="margin-bottom:11px;gap:7px">
+          <select class="fi" style="width:auto;font-size:11px;padding:5px 8px"><option>All projects</option><option>Sample API</option><option>EAD API</option></select>
+          <select class="fi" style="width:auto;font-size:11px;padding:5px 8px"><option>All statuses</option><option>Completed</option><option>Failed</option><option>Running</option></select>
+          <select class="fi" style="width:auto;font-size:11px;padding:5px 8px"><option>Last 7 days</option><option>Last 30 days</option><option>All time</option></select>
+        </div>
+        <div class="sec">
+          <table>
+            <thead><tr><th>Project</th><th>Commit</th><th>Status</th><th>Energy/req</th><th>Latency</th><th>Power</th><th>Device</th><th>Triggered</th><th></th></tr></thead>
+            <tbody>
+              <tr class="click" onclick="go('run-detail')"><td>Sample API</td><td><code>3f8a1bc</code></td><td><span class="badge bg">completed</span></td><td>0.361 J</td><td>98 ms</td><td>2.46 W</td><td>dev-agent</td><td>webhook</td><td><button class="btn xs">View</button></td></tr>
+              <tr class="click" onclick="go('run-detail')"><td>Sample API</td><td><code>b2e9044</code></td><td><span class="badge br">completed ⚠</span></td><td class="red" style="font-weight:500">0.680 J</td><td class="red">198 ms</td><td>4.10 W</td><td>dev-agent</td><td>webhook</td><td><button class="btn xs">View</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ ALERTS ══ -->
+      <div class="page" id="p-alerts">
+        <div class="ph">
+          <div><div class="pt">Regression alerts</div><div class="ps">Energy and performance regressions detected across runs</div></div>
+          <button class="btn threshold-btn" onclick="openModal('threshold-modal')">Configure thresholds</button>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">Open alerts (3)</span></div>
+          <div class="ar"><span class="badge br">critical</span><div style="flex:1"><div style="font-weight:500">energy_per_request_j +82%</div><div class="muted" style="font-size:11px">Sample API · 0.411→0.680 J · b2e9044 · 8 min ago</div></div><button class="btn xs ack-btn" onclick="this.closest('.ar').classList.add('acked')">Acknowledge</button></div>
+          <div class="ar"><span class="badge ba">warning</span><div style="flex:1"><div style="font-weight:500">mean_latency_ms +31%</div><div class="muted" style="font-size:11px">EAD API · 102→134 ms · 7c3a021 · 1 hr ago</div></div><button class="btn xs ack-btn" onclick="this.closest('.ar').classList.add('acked')">Acknowledge</button></div>
+          <div class="ar"><span class="badge ba">warning</span><div style="flex:1"><div style="font-weight:500">mean_cpu_pct +24%</div><div class="muted" style="font-size:11px">Sample API · 15.2→18.9% · b2e9044 · 8 min ago</div></div><button class="btn xs ack-btn" onclick="this.closest('.ar').classList.add('acked')">Acknowledge</button></div>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">Acknowledged</span></div>
+          <div class="ar acked"><span class="badge bb">acknowledged</span><div style="flex:1;margin-left:4px">mean_latency_ms +65% · Sample API · admin · 2 hr ago</div></div>
+        </div>
+      </div>
+
+      <!-- ══ DEVICES ══ -->
+      <div class="page" id="p-devices">
+        <div class="ph">
+          <div><div class="pt">Devices</div><div class="ps">Profiling agents registered to your organisation</div></div>
+          <button class="btn primary" onclick="openModal('device-modal')">+ Register device</button>
+        </div>
+        <div class="sec">
+          <div class="dr"><div class="sd on"></div><div style="flex:1"><div style="font-weight:500">dev-agent</div><div class="muted" style="font-size:11px">linux/x86_64 · v0.1.0 · last seen just now</div></div><span class="badge bg">online</span><button class="btn xs">View key</button><button class="btn xs danger">Revoke</button></div>
+          <div class="dr"><div class="sd on"></div><div style="flex:1"><div style="font-weight:500">pi-4-office</div><div class="muted" style="font-size:11px">linux/arm64 · v0.1.0 · 4 min ago</div></div><span class="badge bg">online</span><button class="btn xs">View key</button><button class="btn xs danger">Revoke</button></div>
+          <div class="dr"><div class="sd busy"></div><div style="flex:1"><div style="font-weight:500">pi-4-lab</div><div class="muted" style="font-size:11px">linux/arm64 · v0.1.0 · running job</div></div><span class="badge ba">busy</span><button class="btn xs">View key</button><button class="btn xs danger">Revoke</button></div>
+          <div class="dr"><div class="sd off"></div><div style="flex:1"><div style="font-weight:500">pi-3-spare</div><div class="muted" style="font-size:11px">linux/armv7 · v0.1.0 · 2 hr ago</div></div><span class="badge bb">offline</span><button class="btn xs">View key</button><button class="btn xs danger">Revoke</button></div>
+        </div>
+      </div>
+
+      <!-- ══ WORKLOADS ══ -->
+      <div class="page" id="p-workloads">
+        <div class="ph">
+          <div><div class="pt">Workloads</div><div class="ps">Request profiles for energy measurement runs</div></div>
+          <button class="btn primary" onclick="openModal('workload-modal')">+ New workload</button>
+        </div>
+        <div class="sec">
+          <table>
+            <thead><tr><th>Name</th><th>Project</th><th>Type</th><th>Requests</th><th>Concurrency</th><th>Last used</th><th></th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:500">Default workload</td><td>Sample API</td><td><span class="badge bi">manual</span></td><td>100</td><td>5</td><td>2 min ago</td><td class="row"><button class="btn xs">Edit</button><button class="btn xs danger">Delete</button></td></tr>
+              <tr><td style="font-weight:500">Stress test</td><td>Sample API</td><td><span class="badge ba">stress</span></td><td>500</td><td>20</td><td>1 day ago</td><td class="row"><button class="btn xs">Edit</button><button class="btn xs danger">Delete</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ SETTINGS ══ -->
+      <div class="page" id="p-settings">
+        <div class="ph"><div><div class="pt">Settings</div><div class="ps">Organisation, API keys, integrations, and members</div></div></div>
+        <div class="sec">
+          <div class="sh"><span class="st">Organisation</span></div>
+          <div style="padding:14px;max-width:380px;display:grid;gap:11px">
+            <div class="fg"><label class="fl">Organisation name</label><input class="fi" value="LUT University"/></div>
+            <div class="fg"><label class="fl">Slug</label><input class="fi" value="lut-university"/></div>
+            <div class="fg"><label class="fl">Tier</label><select class="fi"><option>Enterprise</option><option>Team</option><option>Open</option></select></div>
+            <button class="btn primary" style="width:fit-content">Save changes</button>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">API keys</span><button class="btn sm primary" onclick="openModal('apikey-modal')">+ Create key</button></div>
+          <table>
+            <thead><tr><th>Name</th><th>Prefix</th><th>Scopes</th><th>Last used</th><th>Expires</th><th></th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:500">Local dev agent</td><td><code>vf_a1b2</code></td><td><span class="badge bi">device:poll</span></td><td>just now</td><td>never</td><td><button class="btn xs danger">Revoke</button></td></tr>
+              <tr><td style="font-weight:500">CI pipeline</td><td><code>vf_d4e5</code></td><td><span class="badge bi">runs:write</span></td><td>2 hr ago</td><td>2025-12-31</td><td><button class="btn xs danger">Revoke</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">GitHub integration</span></div>
+          <div style="padding:14px;max-width:380px;display:grid;gap:11px">
+            <div class="fg"><label class="fl">GitHub App ID</label><input class="fi" placeholder="e.g. 123456"/></div>
+            <div class="fg"><label class="fl">Webhook secret</label><input class="fi" type="password" placeholder="•••••••••••"/></div>
+            <button class="btn primary" style="width:fit-content">Save GitHub config</button>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">Members</span><button class="btn sm primary">+ Invite member</button></div>
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th></th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:500">Mbanyick Joof</td><td>mbanyick.joof@lut.fi</td><td><span class="badge bi">org_admin</span></td><td>Jan 2025</td><td></td></tr>
+              <tr><td>Hatef Shamshiri</td><td>hatef.shamshiri@lut.fi</td><td><select class="fi" style="width:auto;font-size:11px;padding:2px 6px"><option>developer</option><option>viewer</option><option>org_admin</option></select></td><td>Feb 2025</td><td><button class="btn xs danger">Remove</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ 403 PAGE ══ -->
+      <div class="page" id="p-forbidden">
+        <div class="forbidden">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="8" y="14" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M11 14v-4a5 5 0 0110 0v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="20.5" r="1.5" fill="currentColor"/></svg>
+          <h2>Access restricted</h2>
+          <p>You need <strong id="required-role">org_admin</strong> access to view this page.</p>
+        </div>
+      </div>
+
+      <!-- ══ ADMIN OVERVIEW ══ -->
+      <div class="page" id="p-admin-overview">
+        <div class="ph">
+          <div><div class="pt">Platform overview</div><div class="ps">Aggregate stats across all organisations</div></div>
+          <button class="btn primary" onclick="openModal('org-create-modal')">+ New organisation</button>
+        </div>
+        <div class="cards">
+          <div class="mc"><div class="mcl">Organisations</div><div class="mcv">7</div><div class="mcs">2 created this month</div></div>
+          <div class="mc"><div class="mcl">Total users</div><div class="mcv">34</div><div class="mcs">across all orgs</div></div>
+          <div class="mc"><div class="mcl">Total runs</div><div class="mcv">1,204</div><div class="mcs">all time</div></div>
+          <div class="mc"><div class="mcl">Active devices</div><div class="mcv green">8</div><div class="mcs">platform-wide</div></div>
+          <div class="mc"><div class="mcl">Platform energy</div><div class="mcv amber">48.2 kJ</div><div class="mcs">all runs total</div></div>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">Organisations</span><button class="btn xs" onclick="go('admin-orgs')">Manage all →</button></div>
+          <table>
+            <thead><tr><th>Name</th><th>Tier</th><th>Users</th><th>Projects</th><th>Runs</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr class="click" onclick="go('admin-org-detail')"><td style="font-weight:500">LUT University</td><td><span class="tier-badge tier-ent">Enterprise</span></td><td>5</td><td>4</td><td>127</td><td><span class="badge bg">active</span></td><td class="row"><button class="btn xs" onclick="event.stopPropagation();go('admin-org-detail')">Manage</button></td></tr>
+              <tr class="click" onclick="go('admin-org-detail')"><td style="font-weight:500">Hackathon Lagos</td><td><span class="tier-badge tier-team">Team</span></td><td>12</td><td>8</td><td>344</td><td><span class="badge bg">active</span></td><td class="row"><button class="btn xs">Manage</button></td></tr>
+              <tr class="click" onclick="go('admin-org-detail')"><td style="font-weight:500">Demo Org</td><td><span class="tier-badge tier-open">Open</span></td><td>2</td><td>1</td><td>18</td><td><span class="badge bb">suspended</span></td><td class="row"><button class="btn xs">Manage</button><button class="btn xs danger">Delete</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sec">
+          <div class="sh"><span class="st">Recent platform activity</span></div>
+          <div class="ar"><span class="badge bg" style="flex-shrink:0">org created</span><span style="flex:1">Hackathon Lagos — created by super admin</span><span class="muted">3 hr ago</span></div>
+          <div class="ar"><span class="badge bi" style="flex-shrink:0">user invited</span><span style="flex:1">hatef.shamshiri@lut.fi joined LUT University</span><span class="muted">1 day ago</span></div>
+          <div class="ar"><span class="badge br" style="flex-shrink:0">regression</span><span style="flex:1">energy +82% — Sample API, LUT University</span><span class="muted">8 min ago</span></div>
+          <div class="ar"><span class="badge ba" style="flex-shrink:0">suspended</span><span style="flex:1">Demo Org suspended by super admin</span><span class="muted">2 days ago</span></div>
+        </div>
+      </div>
+
+      <!-- ══ ADMIN ORGS ══ -->
+      <div class="page" id="p-admin-orgs">
+        <div class="ph">
+          <div><div class="pt">Organisations</div><div class="ps">All organisations on the platform</div></div>
+          <button class="btn primary" onclick="openModal('org-create-modal')">+ New organisation</button>
+        </div>
+        <div class="row" style="margin-bottom:11px;gap:7px">
+          <input class="fi" placeholder="Search by name or slug…" style="max-width:220px;font-size:12px"/>
+          <select class="fi" style="width:auto;font-size:11px;padding:5px 8px"><option>All tiers</option><option>Enterprise</option><option>Team</option><option>Open</option></select>
+          <select class="fi" style="width:auto;font-size:11px;padding:5px 8px"><option>All statuses</option><option>Active</option><option>Suspended</option></select>
+        </div>
+        <div class="sec">
+          <table>
+            <thead><tr><th>Name</th><th>Slug</th><th>Tier</th><th>Users</th><th>Projects</th><th>Devices</th><th>Created</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr class="click" onclick="go('admin-org-detail')"><td style="font-weight:500">LUT University</td><td><code>lut-university</code></td><td><span class="tier-badge tier-ent">Enterprise</span></td><td>5</td><td>4</td><td>3</td><td>Jan 2025</td><td><span class="badge bg">active</span></td><td class="row"><button class="btn xs">Manage</button><button class="btn xs danger">Suspend</button></td></tr>
+              <tr class="click" onclick="go('admin-org-detail')"><td style="font-weight:500">Hackathon Lagos</td><td><code>hackathon-lagos</code></td><td><span class="tier-badge tier-team">Team</span></td><td>12</td><td>8</td><td>5</td><td>Mar 2025</td><td><span class="badge bg">active</span></td><td class="row"><button class="btn xs">Manage</button><button class="btn xs danger">Suspend</button></td></tr>
+              <tr class="click" onclick="go('admin-org-detail')"><td style="font-weight:500">Demo Org</td><td><code>demo-org</code></td><td><span class="tier-badge tier-open">Open</span></td><td>2</td><td>1</td><td>0</td><td>Apr 2025</td><td><span class="badge bb">suspended</span></td><td class="row"><button class="btn xs">Unsuspend</button><button class="btn xs danger">Delete</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ ADMIN ORG DETAIL ══ -->
+      <div class="page" id="p-admin-org-detail">
+        <div class="ph">
+          <div><div class="pt">LUT University</div><div class="ps">lut-university · Enterprise tier</div></div>
+          <div class="row">
+            <button class="btn">Edit org</button>
+            <button class="btn" onclick="alert('Switches to org view with the top banner')">View as org →</button>
+            <button class="btn danger">Suspend</button>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="mc"><div class="mcl">Users</div><div class="mcv">5</div></div>
+          <div class="mc"><div class="mcl">Projects</div><div class="mcv">4</div></div>
+          <div class="mc"><div class="mcl">Devices</div><div class="mcv green">2 online</div></div>
+          <div class="mc"><div class="mcl">Total runs</div><div class="mcv">127</div></div>
+          <div class="mc"><div class="mcl">Energy total</div><div class="mcv">18.4 kJ</div></div>
+        </div>
+        <div class="sec">
+          <div class="tabs">
+            <div class="tab active" onclick="tab(this,'ao-members')">Members</div>
+            <div class="tab" onclick="tab(this,'ao-projects')">Projects</div>
+            <div class="tab" onclick="tab(this,'ao-devices')">Devices</div>
+            <div class="tab" onclick="tab(this,'ao-keys')">API keys</div>
+          </div>
+          <div class="tp active" id="ao-members">
+            <table>
+              <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Last active</th><th></th></tr></thead>
+              <tbody>
+                <tr><td style="font-weight:500">Mbanyick Joof</td><td>mbanyick.joof@lut.fi</td><td><select class="fi" style="width:auto;font-size:11px;padding:2px 6px"><option>org_admin</option><option>developer</option><option>viewer</option></select></td><td>just now</td><td><button class="btn xs danger">Remove</button></td></tr>
+                <tr><td>Hatef Shamshiri</td><td>hatef.shamshiri@lut.fi</td><td><select class="fi" style="width:auto;font-size:11px;padding:2px 6px"><option>developer</option><option>org_admin</option><option>viewer</option></select></td><td>4 min ago</td><td><button class="btn xs danger">Remove</button></td></tr>
+                <tr><td>Ola Adisa</td><td>ola.adisa@lut.fi</td><td><select class="fi" style="width:auto;font-size:11px;padding:2px 6px"><option>viewer</option><option>developer</option><option>org_admin</option></select></td><td>1 day ago</td><td><button class="btn xs danger">Remove</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tp" id="ao-projects">
+            <table>
+              <thead><tr><th>Name</th><th>Target URL</th><th>Runs</th><th>Last run</th></tr></thead>
+              <tbody>
+                <tr class="click"><td style="font-weight:500">Sample API</td><td class="muted">localhost:8000</td><td>56</td><td>2 min ago</td></tr>
+                <tr class="click"><td style="font-weight:500">EAD API</td><td class="muted">localhost:9000</td><td>31</td><td>22 min ago</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tp" id="ao-devices">
+            <table>
+              <thead><tr><th>Name</th><th>Platform</th><th>Status</th><th>Last seen</th><th></th></tr></thead>
+              <tbody>
+                <tr><td style="font-weight:500">dev-agent</td><td>linux/x86_64</td><td><span class="badge bg">online</span></td><td>just now</td><td><button class="btn xs danger">Revoke key</button></td></tr>
+                <tr><td style="font-weight:500">pi-4-office</td><td>linux/arm64</td><td><span class="badge bg">online</span></td><td>4 min ago</td><td><button class="btn xs danger">Revoke key</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tp" id="ao-keys">
+            <table>
+              <thead><tr><th>Name</th><th>Prefix</th><th>Scopes</th><th>Last used</th><th></th></tr></thead>
+              <tbody>
+                <tr><td style="font-weight:500">Local dev agent</td><td><code>vf_a1b2</code></td><td><span class="badge bi">device:poll</span></td><td>just now</td><td><button class="btn xs danger">Revoke</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ADMIN USERS ══ -->
+      <div class="page" id="p-admin-users">
+        <div class="ph">
+          <div><div class="pt">All users</div><div class="ps">Cross-organisation user management</div></div>
+        </div>
+        <div class="row" style="margin-bottom:11px;gap:7px">
+          <input class="fi" placeholder="Search by name or email…" style="max-width:220px;font-size:12px"/>
+          <select class="fi" style="width:auto;font-size:11px;padding:5px 8px"><option>All orgs</option><option>LUT University</option><option>Hackathon Lagos</option></select>
+          <select class="fi" style="width:auto;font-size:11px;padding:5px 8px"><option>All roles</option><option>org_admin</option><option>developer</option><option>viewer</option></select>
+        </div>
+        <div class="sec">
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Organisation</th><th>Role</th><th>Last active</th><th>Joined</th><th></th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:500">Mbanyick Joof</td><td>mbanyick.joof@lut.fi</td><td>LUT University</td><td><span class="badge bi">org_admin</span></td><td>just now</td><td>Jan 2025</td><td class="row"><button class="btn xs">Edit role</button></td></tr>
+              <tr><td>Hatef Shamshiri</td><td>hatef.shamshiri@lut.fi</td><td>LUT University</td><td><span class="badge bg">developer</span></td><td>4 min ago</td><td>Feb 2025</td><td class="row"><button class="btn xs">Edit role</button><button class="btn xs danger">Remove</button></td></tr>
+              <tr><td>Ola Adisa</td><td>ola.adisa@lut.fi</td><td>LUT University</td><td><span class="badge bb">viewer</span></td><td>1 day ago</td><td>Mar 2025</td><td class="row"><button class="btn xs">Edit role</button><button class="btn xs danger">Remove</button></td></tr>
+              <tr><td>Demo User 1</td><td>user1@hacklagos.io</td><td>Hackathon Lagos</td><td><span class="badge bg">developer</span></td><td>2 hr ago</td><td>Mar 2025</td><td class="row"><button class="btn xs">Edit role</button><button class="btn xs danger">Remove</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /content -->
+</div><!-- /shell -->
+
+<!-- MODALS -->
+<div class="mbg" id="project-modal"><div class="modal">
+  <div class="mt2">New project</div>
+  <div class="fg"><label class="fl">Project name *</label><input class="fi" placeholder="e.g. Sample API"/></div>
+  <div class="fg"><label class="fl">Target API URL *</label><input class="fi" placeholder="http://localhost:8000"/></div>
+  <div class="fg"><label class="fl">Repository URL</label><input class="fi" placeholder="https://github.com/org/repo"/></div>
+  <div class="fr">
+    <div class="fg"><label class="fl">Default branch</label><input class="fi" value="main"/></div>
+    <div class="fg"><label class="fl">GitHub repo (org/repo)</label><input class="fi" placeholder="sansa/verdeflow"/></div>
+  </div>
+  <div class="fg"><label class="fl">OpenAPI spec URL (auto-imports endpoints)</label><input class="fi" placeholder="http://localhost:8000/openapi.json"/></div>
+  <div class="mf"><button class="btn" onclick="closeModal('project-modal')">Cancel</button><button class="btn primary">Create project</button></div>
+</div></div>
+
+<div class="mbg" id="run-modal"><div class="modal">
+  <div class="mt2">Trigger profiling run</div>
+  <div class="fg"><label class="fl">Project *</label><select class="fi"><option>Sample API</option><option>EAD API</option></select></div>
+  <div class="fg"><label class="fl">Workload *</label><select class="fi"><option>Default workload — 100 req, concurrency 5</option><option>Stress test — 500 req, concurrency 20</option></select></div>
+  <div class="fg"><label class="fl">Device *</label><select class="fi"><option>dev-agent (online)</option><option>pi-4-office (online)</option><option>pi-4-lab (busy)</option></select></div>
+  <div class="fr">
+    <div class="fg"><label class="fl">Commit hash (optional)</label><input class="fi" placeholder="HEAD"/></div>
+    <div class="fg"><label class="fl">Branch</label><input class="fi" value="main"/></div>
+  </div>
+  <div class="mf"><button class="btn" onclick="closeModal('run-modal')">Cancel</button><button class="btn primary">Queue run</button></div>
+</div></div>
+
+<div class="mbg" id="endpoint-modal"><div class="modal">
+  <div class="mt2">Add endpoint profile</div>
+  <div class="fr">
+    <div class="fg"><label class="fl">Method *</label><select class="fi"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option></select></div>
+    <div class="fg"><label class="fl">Path *</label><input class="fi" placeholder="/api/users/{id}"/></div>
+  </div>
+  <div class="fg"><label class="fl">Request body (JSON)</label><textarea class="fi" rows="3" placeholder='{"n": 10000}'></textarea></div>
+  <div class="fr">
+    <div class="fg"><label class="fl">Weight (0–100)</label><input class="fi" type="number" value="50"/></div>
+    <div class="fg"><label class="fl">Description</label><input class="fi" placeholder="Optional"/></div>
+  </div>
+  <div class="mf"><button class="btn" onclick="closeModal('endpoint-modal')">Cancel</button><button class="btn primary">Add endpoint</button></div>
+</div></div>
+
+<div class="mbg" id="device-modal"><div class="modal">
+  <div class="mt2">Register device</div>
+  <div class="fg"><label class="fl">Device name *</label><input class="fi" placeholder="e.g. pi-4-lab"/></div>
+  <div class="fg"><label class="fl">Description</label><input class="fi" placeholder="e.g. Raspberry Pi 4, lab room 3"/></div>
+  <div id="dev-key-box" class="key-box"></div>
+  <p id="dev-key-note" style="font-size:11px;color:var(--t3);margin-top:6px;display:none">This key will only be shown once. Copy it now.</p>
+  <div class="mf">
+    <button class="btn" id="dev-cancel" onclick="closeModal('device-modal')">Cancel</button>
+    <button class="btn primary" id="dev-submit" onclick="revealKey('dev')">Generate API key</button>
+  </div>
+</div></div>
+
+<div class="mbg" id="apikey-modal"><div class="modal">
+  <div class="mt2">Create API key</div>
+  <div class="fg"><label class="fl">Key name *</label><input class="fi" placeholder="e.g. CI pipeline"/></div>
+  <div class="fg"><label class="fl">Scopes</label>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:5px">
+      <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="checkbox" checked> device:poll</label>
+      <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="checkbox"> runs:write</label>
+      <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="checkbox"> runs:read</label>
+      <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="checkbox"> ingest:write</label>
+      <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="checkbox"> admin</label>
+    </div>
+  </div>
+  <div class="fg"><label class="fl">Expires (leave blank = no expiry)</label><input class="fi" type="date"/></div>
+  <div id="api-key-box" class="key-box"></div>
+  <p id="api-key-note" style="font-size:11px;color:var(--t3);margin-top:6px;display:none">This key will only be shown once. Copy it now.</p>
+  <div class="mf">
+    <button class="btn" onclick="closeModal('apikey-modal')">Cancel</button>
+    <button class="btn primary" id="api-submit" onclick="revealKey('api')">Create key</button>
+  </div>
+</div></div>
+
+<div class="mbg" id="workload-modal"><div class="modal">
+  <div class="mt2">New workload</div>
+  <div class="fg"><label class="fl">Name *</label><input class="fi" placeholder="e.g. Default workload"/></div>
+  <div class="fg"><label class="fl">Project *</label><select class="fi"><option>Sample API</option><option>EAD API</option></select></div>
+  <div class="fg"><label class="fl">Type</label><select class="fi"><option>manual</option><option>stress</option><option>openapi</option></select></div>
+  <div class="fr">
+    <div class="fg"><label class="fl">Total requests *</label><input class="fi" type="number" value="100"/></div>
+    <div class="fg"><label class="fl">Concurrency *</label><input class="fi" type="number" value="5"/></div>
+  </div>
+  <div class="fg"><label class="fl">Ramp-up (seconds)</label><input class="fi" type="number" value="5"/></div>
+  <div class="mf"><button class="btn" onclick="closeModal('workload-modal')">Cancel</button><button class="btn primary">Create workload</button></div>
+</div></div>
+
+<div class="mbg" id="threshold-modal"><div class="modal">
+  <div class="mt2">Configure alert thresholds</div>
+  <p style="font-size:12px;color:var(--t2);margin-bottom:13px">Percentage increase vs previous run that triggers an alert.</p>
+  <table style="font-size:12px">
+    <thead><tr><th>Metric</th><th>Warning (%+)</th><th>Critical (%+)</th></tr></thead>
+    <tbody>
+      <tr><td>energy_per_request_j</td><td><input class="fi" value="10" style="width:60px;padding:4px 7px"/></td><td><input class="fi" value="30" style="width:60px;padding:4px 7px"/></td></tr>
+      <tr><td>mean_latency_ms</td><td><input class="fi" value="15" style="width:60px;padding:4px 7px"/></td><td><input class="fi" value="50" style="width:60px;padding:4px 7px"/></td></tr>
+      <tr><td>mean_power_w</td><td><input class="fi" value="10" style="width:60px;padding:4px 7px"/></td><td><input class="fi" value="25" style="width:60px;padding:4px 7px"/></td></tr>
+      <tr><td>mean_cpu_pct</td><td><input class="fi" value="20" style="width:60px;padding:4px 7px"/></td><td><input class="fi" value="40" style="width:60px;padding:4px 7px"/></td></tr>
+    </tbody>
+  </table>
+  <div class="mf"><button class="btn" onclick="closeModal('threshold-modal')">Cancel</button><button class="btn primary">Save thresholds</button></div>
+</div></div>
+
+<div class="mbg" id="org-create-modal"><div class="modal">
+  <div class="mt2">New organisation</div>
+  <div class="fg"><label class="fl">Organisation name *</label><input class="fi" placeholder="e.g. University of Lagos"/></div>
+  <div class="fg"><label class="fl">Slug *</label><input class="fi" placeholder="e.g. uni-lagos"/></div>
+  <div class="fg"><label class="fl">Tier</label><select class="fi"><option>Open</option><option>Team</option><option>Enterprise</option></select></div>
+  <div class="fg"><label class="fl">Admin user email (will receive invite)</label><input class="fi" placeholder="admin@org.example"/></div>
+  <div class="mf"><button class="btn" onclick="closeModal('org-create-modal')">Cancel</button><button class="btn primary">Create organisation</button></div>
+</div></div>
+
+<script>
+// ── Role definitions ──────────────────────────────────────────────────────────
+const ROLES = { viewer:0, developer:1, org_admin:2, super_admin:3 };
+let currentRole = 'developer';
+
+const ROLE_CONFIG = {
+  viewer: {
+    hint: 'All create/edit/delete actions hidden — read only',
+    sfRole: '<span class="role-pill rp-viewer">Viewer</span>',
+    sfName: 'LUT University',
+    sfAvClass: 'av',
+  },
+  developer: {
+    hint: 'All create/edit/delete actions visible',
+    sfRole: '<span class="role-pill rp-developer">Developer</span>',
+    sfName: 'LUT University',
+    sfAvClass: 'av',
+  },
+  org_admin: {
+    hint: 'Full org management — Settings visible, can edit/delete projects',
+    sfRole: '<span class="role-pill rp-admin">Admin</span>',
+    sfName: 'LUT University',
+    sfAvClass: 'av',
+  },
+  super_admin: {
+    hint: 'Platform admin — completely different navigation layer',
+    sfRole: '<span class="role-pill rp-superadmin">Super admin</span>',
+    sfName: 'Platform Admin',
+    sfAvClass: 'av admin-av',
+  },
+};
+
+// ── Role-based UI toggles ─────────────────────────────────────────────────────
+function applyRole(role) {
+  currentRole = role;
+  const rank = ROLES[role];
+  const cfg = ROLE_CONFIG[role];
+
+  // Update role switcher buttons
+  document.querySelectorAll('.rBtn').forEach(b => b.classList.remove('active','admin-active'));
+  const btn = document.getElementById('btn-' + (role === 'org_admin' ? 'admin' : role === 'super_admin' ? 'super' : role));
+  if (btn) btn.classList.add(role === 'super_admin' ? 'admin-active' : 'active');
+  document.getElementById('role-hint').textContent = cfg.hint;
+
+  // Sidebar shell
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('admin-shell', role === 'super_admin');
+
+  // Logo
+  document.getElementById('logo-org').style.display = role === 'super_admin' ? 'none' : 'flex';
+  document.getElementById('logo-admin').style.display = role === 'super_admin' ? 'flex' : 'none';
+
+  // Nav sections
+  document.getElementById('nav-org').style.display = role === 'super_admin' ? 'none' : 'block';
+  document.getElementById('nav-admin').style.display = role === 'super_admin' ? 'block' : 'none';
+  const navManage = document.getElementById('nav-manage');
+  const navSettings = document.getElementById('nav-settings');
+  if (navManage) navManage.style.display = rank >= ROLES.developer ? 'block' : 'none';
+  if (navSettings) navSettings.style.display = rank >= ROLES.org_admin ? 'block' : 'none';
+
+  // Sidebar footer
+  document.getElementById('sf-av').className = cfg.sfAvClass;
+  document.getElementById('sf-name').textContent = cfg.sfName;
+  document.getElementById('sf-role').innerHTML = cfg.sfRole;
+
+  // Topbar
+  document.getElementById('admin-pill-wrap').style.display = role === 'super_admin' ? 'flex' : 'none';
+  const ta = document.getElementById('topbar-actions');
+  const rl = document.getElementById('readonly-label');
+  if (role === 'viewer') {
+    ta.style.display = 'none';
+    rl.style.display = 'block';
+  } else if (role === 'super_admin') {
+    ta.innerHTML = '<button class="btn primary" onclick="openModal(\'org-create-modal\')">+ New organisation</button>';
+    ta.style.display = 'flex';
+    rl.style.display = 'none';
+  } else {
+    ta.innerHTML = '<button class="btn" onclick="openModal(\'run-modal\')">Trigger run</button><button class="btn primary" onclick="openModal(\'project-modal\')">+ New project</button>';
+    ta.style.display = 'flex';
+    rl.style.display = 'none';
+  }
+
+  // Project list page — "+ New project" button
+  const pa = document.getElementById('projects-actions');
+  if (pa) pa.style.display = rank >= ROLES.developer ? 'flex' : 'none';
+
+  // Project detail — edit/delete buttons
+  document.querySelectorAll('.proj-edit-btn,.proj-delete-btn').forEach(b => {
+    b.style.display = rank >= ROLES.org_admin ? 'inline-flex' : 'none';
+  });
+
+  // Project detail — endpoints/workloads tab management buttons
+  document.querySelectorAll('.ep-add-btn,.ep-edit-btn,.ep-del-btn,.wl-add-btn,.wl-edit-btn,.wl-del-btn').forEach(b => {
+    b.style.display = rank >= ROLES.developer ? 'inline-flex' : 'none';
+  });
+
+  // Project detail — endpoint and workload tabs
+  document.querySelectorAll('.proj-ep-tab,.proj-wl-tab').forEach(t => {
+    t.style.display = rank >= ROLES.developer ? 'block' : 'none';
+  });
+
+  // Acknowledge buttons
+  document.querySelectorAll('.ack-btn').forEach(b => {
+    b.style.display = rank >= ROLES.developer ? 'inline-flex' : 'none';
+  });
+
+  // Alert threshold button
+  document.querySelectorAll('.threshold-btn').forEach(b => {
+    b.style.display = rank >= ROLES.org_admin ? 'inline-flex' : 'none';
+  });
+
+  // Run trigger button on runs page
+  document.querySelectorAll('.run-trigger-btn').forEach(b => {
+    b.style.display = rank >= ROLES.developer ? 'inline-flex' : 'none';
+  });
+
+  // Navigate to appropriate default page
+  if (role === 'super_admin') {
+    go('admin-overview');
+  } else {
+    go('dashboard');
+  }
+}
+
+function setRole(role) { applyRole(role); }
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+const BC_MAP = {
+  dashboard:'Dashboard', projects:'Projects', 'project-detail':'Projects / Sample API',
+  runs:'Runs', 'run-detail':'Runs / 3f8a1bc', devices:'Devices',
+  workloads:'Workloads', alerts:'Alerts', settings:'Settings', forbidden:'Access restricted',
+  'admin-overview':'Platform overview', 'admin-orgs':'Organisations',
+  'admin-org-detail':'Organisations / LUT University', 'admin-users':'All users',
+};
+
+const NAV_TO_ITEM = {
+  dashboard:'Dashboard', projects:'Projects', 'project-detail':'Projects',
+  runs:'Runs', 'run-detail':'Runs', devices:'Devices', workloads:'Workloads',
+  alerts:'Alerts', settings:'Settings',
+  'admin-overview':'Overview', 'admin-orgs':'Organisations',
+  'admin-org-detail':'Organisations', 'admin-users':'All users',
+};
+
+// Pages requiring minimum role
+const PAGE_MIN_ROLE = {
+  devices:'developer', workloads:'developer', settings:'org_admin',
+  'admin-overview':'super_admin', 'admin-orgs':'super_admin',
+  'admin-org-detail':'super_admin', 'admin-users':'super_admin',
+};
+
+function go(page) {
+  const minRole = PAGE_MIN_ROLE[page];
+  if (minRole && ROLES[currentRole] < ROLES[minRole]) {
+    document.getElementById('required-role').textContent = minRole.replace('_',' ');
+    showPage('forbidden');
+    document.getElementById('bc').innerHTML = '<span class="bcc">Access restricted</span>';
+    return;
+  }
+  showPage(page);
+  document.getElementById('bc').innerHTML = '<span class="bcc">' + (BC_MAP[page] || page) + '</span>';
+  // Highlight correct nav item
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const target = NAV_TO_ITEM[page] || '';
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.textContent.trim().startsWith(target)) n.classList.add('active');
+  });
+}
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('p-' + page);
+  if (el) { el.classList.add('active'); el.scrollTop = 0; }
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+function tab(el, panelId) {
+  const sec = el.closest('.sec') || el.closest('.page');
+  sec.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  sec.querySelectorAll('.tp').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const p = document.getElementById(panelId);
+  if (p) p.classList.add('active');
+}
+
+// ── Modals ────────────────────────────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.mbg').forEach(bg =>
+  bg.addEventListener('click', e => { if (e.target === bg) bg.classList.remove('open'); })
+);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.mbg.open').forEach(m => m.classList.remove('open'));
+});
+
+// ── Key reveal ────────────────────────────────────────────────────────────────
+function revealKey(type) {
+  const key = 'vf_' + Array.from({length:22},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random()*36)]).join('');
+  if (type === 'dev') {
+    const b = document.getElementById('dev-key-box');
+    const n = document.getElementById('dev-key-note');
+    b.textContent = key; b.style.display = 'block'; n.style.display = 'block';
+    const s = document.getElementById('dev-submit');
+    s.textContent = 'Copy & close';
+    s.onclick = () => { navigator.clipboard?.writeText(key); closeModal('device-modal'); };
+    document.getElementById('dev-cancel').style.display = 'none';
+  } else {
+    const b = document.getElementById('api-key-box');
+    const n = document.getElementById('api-key-note');
+    b.textContent = key; b.style.display = 'block'; n.style.display = 'block';
+    const s = document.getElementById('api-submit');
+    s.textContent = 'Copy & close';
+    s.onclick = () => { navigator.clipboard?.writeText(key); closeModal('apikey-modal'); };
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+applyRole('developer');
+</script>
+</body>
+</html>
