@@ -24,6 +24,8 @@ The measurement protocol, calculations, raw data access, and reproducibility fea
 
 See the [documentation index](doc/README.md) for research specifications, design material, and references from the earlier prototype.
 
+Contributors and coding agents can use the [GitHub work-start convention](doc/contributing/GITHUB_WORKFLOW.md) when opening issues or creating branches.
+
 ## License
 
 VerdeFlow is licensed under the [Apache License 2.0](LICENSE).

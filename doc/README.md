@@ -1,8 +1,12 @@
 # VerdeFlow documentation
 
-This folder collects documents from the earlier VerdeFlow prototype. The [root README](../README.md) describes the proposed direction for the new public project.
+This folder contains current contributor guidance and documents from the earlier VerdeFlow prototype. The [root README](../README.md) describes the proposed direction for the new public project.
 
-These documents are reference material. The prototype setup commands and code links refer to `verdeflow-old` and do not describe a working implementation in this repository. The lab specification describes intended behavior; the alignment review records what was found in the old codebase.
+## Contributing
+
+- [GitHub work-start convention](contributing/GITHUB_WORKFLOW.md) — issues, labels, risk notes, and branch names for contributors and coding agents.
+
+The prototype, design, and research documents below are reference material. The prototype setup commands and code links refer to `verdeflow-old` and do not describe a working implementation in this repository. The lab specification describes intended behavior; the alignment review records what was found in the old codebase.
 
 ## Research and measurement
 
